@@ -66,7 +66,7 @@ instructions, runner, Python engine, schemas, generic policy, and manifest;
 only the host's installation method differs.
 
 Download the reviewed `ai-governance-review-skill.zip` asset from the
-[experimental beta release](https://github.com/lawyer-not-liar/ai-governance-review-kit/releases/download/v0.1.2/ai-governance-review-skill.zip).
+[experimental beta release](https://github.com/lawyer-not-liar/ai-governance-review-kit/releases/download/v0.1.3/ai-governance-review-skill.zip).
 Do not substitute GitHub's automatically generated source archive.
 
 ### Codex

@@ -19,11 +19,26 @@ def test_citation_metadata_uses_repository_identity_and_current_release() -> Non
     citation = (PROJECT_ROOT / "CITATION.cff").read_text(encoding="utf-8")
 
     assert "name: lawyer-not-liar" in citation
-    assert "version: 0.1.2" in citation
-    assert 'date-released: "2026-08-12"' in citation
+    assert "version: 0.1.3" in citation
+    assert 'date-released: "2026-08-17"' in citation
     assert "https://github.com/lawyer-not-liar/ai-governance-review-kit" in citation
     assert "given-names:" not in citation
     assert "family-names:" not in citation
+
+
+def test_public_install_guides_point_to_current_release() -> None:
+    documents = (
+        (PROJECT_ROOT / "README.md").read_text(encoding="utf-8"),
+        (PROJECT_ROOT / "docs/AI_ASSISTED_REVIEW.md").read_text(encoding="utf-8"),
+    )
+
+    release_asset = "releases/download/v0.1.3/ai-governance-review-skill.zip"
+    assert all(release_asset in text for text in documents)
+    assert all("releases/download/v0.1.2/" not in text for text in documents)
+
+    changelog = (PROJECT_ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    assert "## [0.1.3] - 2026-08-17" in changelog
+    assert "## [Unreleased] - target 0.1.3" not in changelog
 
 
 def test_readme_presents_one_skill_for_codex_and_claude_before_python() -> None:

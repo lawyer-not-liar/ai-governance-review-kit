@@ -45,7 +45,7 @@ Those can be added later without making them prerequisites for a basic review.
 reviewed package in Codex or Claude; only the host's installation steps differ.
 
 Download
-[`ai-governance-review-skill.zip`](https://github.com/lawyer-not-liar/ai-governance-review-kit/releases/download/v0.1.2/ai-governance-review-skill.zip)
+[`ai-governance-review-skill.zip`](https://github.com/lawyer-not-liar/ai-governance-review-kit/releases/download/v0.1.3/ai-governance-review-skill.zip)
 from the experimental beta release. Do not download GitHub's automatically
 generated **Source code** archive—that is the repository, not the installable
 skill.

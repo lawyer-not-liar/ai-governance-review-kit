@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased] - target 0.1.3
+## [0.1.3] - 2026-08-17
 
 - Present the skill as an AI-assisted governance review for Codex and Claude.
 - Preserve the deterministic result as an unchanged canonical block before any
