@@ -1,0 +1,35 @@
+schema_version: "1.0"
+request:
+  id: alpha-combined-1
+  title: High-risk fictional applicant screening proposal
+  owner: {name: Jules Example, email: jules@example.invalid}
+purpose:
+  summary: Train and operate a fictional applicant-screening system.
+  intended_outcome: Rank synthetic applicants and publish aggregate examples.
+  affected_people: [fictional applicants]
+  deployment_scope: external
+system:
+  name: Example Applicant Screener
+  provider: Example Systems
+  hosting: unknown
+  autonomy: human_in_the_loop
+  human_oversight: false
+data:
+  categories: [synthetic profiles, fictional contact details]
+  personal_data: true
+  sensitive_data: false
+  training_or_fine_tuning: true
+  retention: Synthetic records are retained for the fictional pilot.
+  cross_border_transfers: false
+outputs:
+  types: [rankings, aggregate examples]
+  recipients: [fictional reviewers, public demonstration visitors]
+  external_distribution: true
+  decisions_influenced: [applicant screening priority]
+evidence:
+  - id: data-handling-record
+    type: record
+    title: Fictional applicant-data handling record
+  - id: training-data-record
+    type: record
+    title: Fictional synthetic training-data source record

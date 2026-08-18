@@ -1,0 +1,29 @@
+schema_version: "1.0"
+request:
+  id: alpha-external-1
+  title: Public product-description drafter
+  owner: {name: Finley Example, email: finley@example.invalid}
+purpose:
+  summary: Draft fictional product descriptions for a public demonstration site.
+  intended_outcome: Give editors a first draft for independent review.
+  affected_people: [website visitors]
+  deployment_scope: external
+system:
+  name: Example Description Drafter
+  provider: Example Systems
+  hosting: managed_private
+  autonomy: assistive
+  human_oversight: true
+data:
+  categories: [fictional product facts]
+  personal_data: false
+  sensitive_data: false
+  training_or_fine_tuning: false
+  retention: Prompts are deleted after publication review.
+  cross_border_transfers: false
+outputs:
+  types: [draft product descriptions]
+  recipients: [editors, website visitors]
+  external_distribution: true
+  decisions_influenced: []
+evidence: []

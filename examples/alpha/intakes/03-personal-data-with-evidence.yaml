@@ -1,0 +1,32 @@
+schema_version: "1.0"
+request:
+  id: alpha-personal-complete-1
+  title: Support message categorizer with data record
+  owner: {name: Casey Example, email: casey@example.invalid}
+purpose:
+  summary: Categorize fictional support messages for routing.
+  intended_outcome: Help staff prioritize response queues.
+  affected_people: [fictional customers]
+  deployment_scope: internal
+system:
+  name: Example Message Categorizer
+  provider: Example Systems
+  hosting: managed_private
+  autonomy: assistive
+  human_oversight: true
+data:
+  categories: [contact details, support messages]
+  personal_data: true
+  sensitive_data: false
+  training_or_fine_tuning: false
+  retention: Messages are retained for thirty fictional days.
+  cross_border_transfers: false
+outputs:
+  types: [routing labels]
+  recipients: [support staff]
+  external_distribution: false
+  decisions_influenced: []
+evidence:
+  - id: data-handling-record
+    type: record
+    title: Fictional support-data handling record

@@ -1,0 +1,29 @@
+schema_version: "1.0"
+request:
+  id: alpha-unknowns-1
+  title: Incomplete assistant proposal
+  owner: {name: Indigo Example, email: indigo@example.invalid}
+purpose:
+  summary: Explore an assistant whose operating details have not been confirmed.
+  intended_outcome: Identify the information required before substantive review.
+  affected_people: [unknown audience]
+  deployment_scope: unknown
+system:
+  name: Example Unspecified Assistant
+  provider: Example Systems
+  hosting: unknown
+  autonomy: unknown
+  human_oversight: unknown
+data:
+  categories: [unconfirmed data]
+  personal_data: unknown
+  sensitive_data: unknown
+  training_or_fine_tuning: unknown
+  retention: Retention is not yet confirmed.
+  cross_border_transfers: unknown
+outputs:
+  types: [unconfirmed outputs]
+  recipients: [unconfirmed recipients]
+  external_distribution: unknown
+  decisions_influenced: []
+evidence: []

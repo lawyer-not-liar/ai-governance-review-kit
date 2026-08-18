@@ -1,0 +1,12 @@
+schema_version: "1.0"
+reviewer: Rowan Reviewer
+decision: approved
+decided_at: "2026-08-06T12:00:00Z"
+policy: {id: example-ai-use-policy, version: 0.1.0}
+conditions: []
+unresolved_risks: []
+acknowledged_findings: [finding-EXAMPLE-DATA-2]
+overrides:
+  - finding_id: finding-EXAMPLE-DATA-2
+    rationale: The reviewer confirmed the fictional synthetic source record and sandbox limits.
+independent_review_confirmed: true

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ai-governance-review-kit/schemas/intake.schema.json",
+  "title": "AI use intake",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "request", "purpose", "system", "data", "outputs", "evidence"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "owner"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "maxLength": 120, "pattern": "^[A-Za-z0-9._-]+$"},
+        "title": {"type": "string", "minLength": 1, "maxLength": 240},
+        "owner": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "email"],
+          "properties": {
+            "name": {"type": "string", "minLength": 1, "maxLength": 160},
+            "email": {"type": "string", "minLength": 3, "maxLength": 254, "pattern": "^[^@\\s]+@[^@\\s]+$"}
+          }
+        },
+        "metadata": {"type": "object"}
+      }
+    },
+    "purpose": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "intended_outcome", "affected_people", "deployment_scope"],
+      "properties": {
+        "summary": {"type": "string", "minLength": 1, "maxLength": 5000},
+        "intended_outcome": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "affected_people": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "deployment_scope": {"enum": ["prototype", "internal", "external", "unknown"]}
+      }
+    },
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "provider", "hosting", "autonomy", "human_oversight"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1, "maxLength": 240},
+        "provider": {"type": "string", "minLength": 1, "maxLength": 240},
+        "hosting": {"enum": ["self_hosted", "managed_private", "third_party", "unknown"]},
+        "autonomy": {"enum": ["assistive", "human_in_the_loop", "human_on_the_loop", "autonomous", "unknown"]},
+        "human_oversight": {"enum": [true, false, "unknown"]}
+      }
+    },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["categories", "personal_data", "sensitive_data", "training_or_fine_tuning", "retention", "cross_border_transfers"],
+      "properties": {
+        "categories": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "personal_data": {"enum": [true, false, "unknown"]},
+        "sensitive_data": {"enum": [true, false, "unknown"]},
+        "training_or_fine_tuning": {"enum": [true, false, "unknown"]},
+        "retention": {"type": "string", "minLength": 1, "maxLength": 1000},
+        "cross_border_transfers": {"enum": [true, false, "unknown"]}
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["types", "recipients", "external_distribution", "decisions_influenced"],
+      "properties": {
+        "types": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "recipients": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+        "external_distribution": {"enum": [true, false, "unknown"]},
+        "decisions_influenced": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "title"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9._-]+$"},
+          "type": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "uri": {"type": "string", "minLength": 1},
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  }
+}

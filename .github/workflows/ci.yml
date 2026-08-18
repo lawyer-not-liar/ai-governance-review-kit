@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Repository hygiene
+        run: python scripts/check_repository_hygiene.py --root .
+
+  test:
+    needs: hygiene
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - name: Install
+        run: python -m pip install -e '.[dev]'
+      - name: Lint
+        run: ruff check .
+      - name: Format check
+        run: ruff format --check src tests scripts
+      - name: Test
+        run: pytest
+      - name: Alpha validation
+        run: python scripts/run_alpha_validation.py --root .
+      - name: Build
+        run: python -m build
+      - name: Build conversational skill
+        run: python scripts/build_skill_bundle.py --root . --output dist/ai-governance-review-skill.zip
+      - name: Verify conversational skill
+        run: python scripts/build_skill_bundle.py --root . --output dist/ai-governance-review-skill.zip --verify
+      - name: Installed wheel smoke test
+        run: |
+          python -m pip install --force-reinstall --no-deps dist/*.whl
+          ai-review validate examples/intakes/example-assistant.yaml --policy policies/example
+          ai-review review examples/intakes/example-assistant.yaml --policy policies/example --no-save > /dev/null

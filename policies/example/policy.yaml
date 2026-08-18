@@ -1,0 +1,74 @@
+policy:
+  id: example-ai-use-policy
+  version: 0.1.0
+  effective_date: "2026-01-01"
+  owner: Example Governance Committee
+  status: demonstration
+  jurisdiction_scope:
+    - example-only
+rules:
+  - id: EXAMPLE-OVERSIGHT-1
+    title: Human oversight absent
+    rationale: This fictional policy requires a person to oversee every demonstrated AI use.
+    severity: block
+    condition:
+      equals:
+        path: system.human_oversight
+        value: false
+    finding: The intake states that human oversight is absent.
+    question: Identify who can review and intervene in the system's operation.
+  - id: EXAMPLE-DATA-1
+    title: Personal data review
+    rationale: This fictional policy sends personal-data uses to a specialist review.
+    severity: review
+    condition:
+      equals:
+        path: data.personal_data
+        value: true
+    finding: The proposed use includes personal data.
+    required_evidence:
+      - data-handling-record
+    question: Provide the fictional organization's data-handling record.
+  - id: EXAMPLE-DATA-2
+    title: Training-data documentation
+    rationale: This fictional policy requires a source record for adaptation or training.
+    severity: block
+    condition:
+      equals:
+        path: data.training_or_fine_tuning
+        value: true
+    finding: Training or fine-tuning is proposed.
+    required_evidence:
+      - training-data-record
+    question: Provide the fictional organization's training-data record.
+  - id: EXAMPLE-OUTPUT-1
+    title: External distribution review
+    rationale: This fictional policy requires an additional review before external distribution.
+    severity: review
+    condition:
+      equals:
+        path: outputs.external_distribution
+        value: true
+    finding: AI-generated outputs will be distributed externally.
+    question: Describe the audience, labeling, and release controls.
+  - id: EXAMPLE-IMPACT-1
+    title: Consequential decision review
+    rationale: This fictional policy requires escalation when AI influences a consequential decision.
+    severity: block
+    condition:
+      not:
+        equals:
+          path: outputs.decisions_influenced
+          value: []
+    finding: The intake identifies decisions influenced by AI output.
+    question: Explain the decision, affected people, and available human appeal.
+  - id: EXAMPLE-COMPLETENESS-1
+    title: Known hosting environment
+    rationale: This fictional policy requires the hosting arrangement to be identified.
+    severity: review
+    condition:
+      equals:
+        path: system.hosting
+        value: unknown
+    finding: The hosting environment is unknown.
+    question: Identify where the system runs and who operates it.

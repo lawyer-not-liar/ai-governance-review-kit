@@ -1,0 +1,29 @@
+schema_version: "1.0"
+request:
+  id: alpha-personal-external-1
+  title: Public event-response drafting assistant
+  owner: {name: Morgan Example, email: morgan@example.invalid}
+purpose:
+  summary: Draft responses to questions about a fictional community event.
+  intended_outcome: Give event staff a first draft for review before public posting.
+  affected_people: [fictional event registrants]
+  deployment_scope: external
+system:
+  name: Example Event Response Drafter
+  provider: Example Systems
+  hosting: managed_private
+  autonomy: assistive
+  human_oversight: true
+data:
+  categories: [fictional contact information, event questions]
+  personal_data: true
+  sensitive_data: false
+  training_or_fine_tuning: false
+  retention: Submitted questions are retained for thirty fictional days.
+  cross_border_transfers: false
+outputs:
+  types: [draft event responses]
+  recipients: [event staff, public website visitors]
+  external_distribution: true
+  decisions_influenced: []
+evidence: []

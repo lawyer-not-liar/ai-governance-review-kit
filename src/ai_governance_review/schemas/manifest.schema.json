@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ai-governance-review-kit/schemas/manifest.schema.json",
+  "title": "Review bundle manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "request_id", "created_at", "tool_version", "policy", "provider", "artifacts"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "run_id": {"type": "string", "minLength": 1},
+    "request_id": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "tool_version": {"type": "string", "minLength": 1},
+    "policy": {"type": "object", "additionalProperties": false, "required": ["id", "version"], "properties": {"id": {"type": "string"}, "version": {"type": "string"}}},
+    "provider": {"type": "string", "minLength": 1},
+    "artifacts": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+  }
+}

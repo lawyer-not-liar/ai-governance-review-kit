@@ -1,0 +1,29 @@
+schema_version: "1.0"
+request:
+  id: alpha-low-risk-1
+  title: Internal grammar assistant
+  owner: {name: Avery Example, email: avery@example.invalid}
+purpose:
+  summary: Suggest grammar edits to fictional internal text.
+  intended_outcome: Improve clarity while an employee retains final control.
+  affected_people: [employees]
+  deployment_scope: internal
+system:
+  name: Example Grammar Assistant
+  provider: Example Systems
+  hosting: managed_private
+  autonomy: assistive
+  human_oversight: true
+data:
+  categories: [fictional business text]
+  personal_data: false
+  sensitive_data: false
+  training_or_fine_tuning: false
+  retention: Inputs are deleted after processing.
+  cross_border_transfers: false
+outputs:
+  types: [text suggestions]
+  recipients: [employees]
+  external_distribution: false
+  decisions_influenced: []
+evidence: []

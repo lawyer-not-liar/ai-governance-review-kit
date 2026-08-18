@@ -1,0 +1,35 @@
+schema_version: "1.0"
+request:
+  id: example-training-1
+  title: Demonstration model adaptation
+  owner:
+    name: Casey Example
+    email: casey@example.invalid
+purpose:
+  summary: Adapt a demonstration model with a synthetic dataset.
+  intended_outcome: Test whether adaptation improves sample classification.
+  affected_people:
+    - test participants
+  deployment_scope: prototype
+system:
+  name: Example Classifier
+  provider: Example Systems
+  hosting: self_hosted
+  autonomy: assistive
+  human_oversight: true
+data:
+  categories:
+    - synthetic examples
+  personal_data: false
+  sensitive_data: false
+  training_or_fine_tuning: true
+  retention: Deleted after the demonstration.
+  cross_border_transfers: false
+outputs:
+  types:
+    - labels
+  recipients:
+    - project team
+  external_distribution: false
+  decisions_influenced: []
+evidence: []

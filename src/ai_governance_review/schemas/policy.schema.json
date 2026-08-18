@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ai-governance-review-kit/schemas/policy.schema.json",
+  "title": "AI governance policy pack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["policy", "rules"],
+  "properties": {
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "effective_date", "owner", "status", "jurisdiction_scope"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1, "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+        "version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+        "effective_date": {"type": "string", "format": "date"},
+        "owner": {"type": "string", "minLength": 1},
+        "status": {"enum": ["demonstration", "draft", "active", "superseded"]},
+        "jurisdiction_scope": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "rationale", "severity", "condition", "finding"],
+        "properties": {
+          "id": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9._-]+$"},
+          "title": {"type": "string", "minLength": 1},
+          "rationale": {"type": "string", "minLength": 1},
+          "severity": {"enum": ["info", "review", "block"]},
+          "condition": {"$ref": "#/$defs/condition"},
+          "finding": {"type": "string", "minLength": 1},
+          "required_evidence": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true, "default": []},
+          "question": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "leaf": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1, "pattern": "^[A-Za-z0-9_.-]+$"},
+        "value": {}
+      }
+    },
+    "condition": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["equals"], "properties": {"equals": {"allOf": [{"$ref": "#/$defs/leaf"}, {"required": ["value"]}]}}},
+        {"type": "object", "additionalProperties": false, "required": ["not_equals"], "properties": {"not_equals": {"allOf": [{"$ref": "#/$defs/leaf"}, {"required": ["value"]}]}}},
+        {"type": "object", "additionalProperties": false, "required": ["contains"], "properties": {"contains": {"allOf": [{"$ref": "#/$defs/leaf"}, {"required": ["value"]}]}}},
+        {"type": "object", "additionalProperties": false, "required": ["exists"], "properties": {"exists": {"$ref": "#/$defs/leaf"}}},
+        {"type": "object", "additionalProperties": false, "required": ["in"], "properties": {"in": {"allOf": [{"$ref": "#/$defs/leaf"}, {"required": ["value"], "properties": {"value": {"type": "array"}}}]}}},
+        {"type": "object", "additionalProperties": false, "required": ["all"], "properties": {"all": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/condition"}}}},
+        {"type": "object", "additionalProperties": false, "required": ["any"], "properties": {"any": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/condition"}}}},
+        {"type": "object", "additionalProperties": false, "required": ["not"], "properties": {"not": {"$ref": "#/$defs/condition"}}}
+      ]
+    }
+  }
+}

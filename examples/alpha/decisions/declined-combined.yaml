@@ -1,0 +1,16 @@
+schema_version: "1.0"
+reviewer: Rowan Reviewer
+decision: declined
+decided_at: "2026-08-06T12:00:00Z"
+policy: {id: example-ai-use-policy, version: 0.1.0}
+conditions: []
+unresolved_risks:
+  - Human oversight is absent.
+  - The proposal influences a consequential screening decision.
+  - The hosting environment is unknown.
+acknowledged_findings:
+  - finding-EXAMPLE-DATA-2
+  - finding-EXAMPLE-IMPACT-1
+  - finding-EXAMPLE-OVERSIGHT-1
+overrides: []
+independent_review_confirmed: true

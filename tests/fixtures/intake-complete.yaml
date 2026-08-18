@@ -1,0 +1,35 @@
+schema_version: "1.0"
+request:
+  id: example-1
+  title: Internal writing assistant
+  owner:
+    name: Alex Example
+    email: alex@example.invalid
+purpose:
+  summary: Suggest edits to internal drafts.
+  intended_outcome: Help staff revise prose.
+  affected_people:
+    - employees
+  deployment_scope: internal
+system:
+  name: Example Assistant
+  provider: Example Systems
+  hosting: managed_private
+  autonomy: human_in_the_loop
+  human_oversight: true
+data:
+  categories:
+    - internal documents
+  personal_data: false
+  sensitive_data: false
+  training_or_fine_tuning: false
+  retention: Inputs are deleted after processing.
+  cross_border_transfers: false
+outputs:
+  types:
+    - text
+  recipients:
+    - employees
+  external_distribution: false
+  decisions_influenced: []
+evidence: []

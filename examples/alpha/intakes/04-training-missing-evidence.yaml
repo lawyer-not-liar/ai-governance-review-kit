@@ -1,0 +1,29 @@
+schema_version: "1.0"
+request:
+  id: alpha-training-missing-1
+  title: Demonstration classifier adaptation without source record
+  owner: {name: Devon Example, email: devon@example.invalid}
+purpose:
+  summary: Adapt a demonstration classifier using synthetic examples.
+  intended_outcome: Measure classification accuracy in a fictional pilot.
+  affected_people: [test participants]
+  deployment_scope: prototype
+system:
+  name: Example Adapted Classifier
+  provider: Example Systems
+  hosting: self_hosted
+  autonomy: assistive
+  human_oversight: true
+data:
+  categories: [synthetic labeled examples]
+  personal_data: false
+  sensitive_data: false
+  training_or_fine_tuning: true
+  retention: The synthetic dataset is retained for the pilot.
+  cross_border_transfers: false
+outputs:
+  types: [test classifications]
+  recipients: [research staff]
+  external_distribution: false
+  decisions_influenced: []
+evidence: []

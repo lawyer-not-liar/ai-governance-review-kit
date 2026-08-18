@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ai-governance-review-kit/schemas/findings.schema.json",
+  "title": "AI governance findings",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "rule_id", "title", "severity", "status", "policy", "facts", "required_evidence", "missing_evidence", "explanation"],
+    "properties": {
+      "id": {"type": "string", "minLength": 1},
+      "rule_id": {"type": "string", "minLength": 1},
+      "title": {"type": "string", "minLength": 1},
+      "severity": {"enum": ["info", "review", "block"]},
+      "status": {"enum": ["satisfied", "triggered", "needs_information", "not_applicable"]},
+      "policy": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "version"],
+        "properties": {"id": {"type": "string"}, "version": {"type": "string"}}
+      },
+      "facts": {"type": "array", "items": {"type": "object", "required": ["path", "present", "value"], "properties": {"path": {"type": "string"}, "present": {"type": "boolean"}, "value": {}}, "additionalProperties": false}},
+      "required_evidence": {"type": "array", "items": {"type": "string"}},
+      "missing_evidence": {"type": "array", "items": {"type": "string"}},
+      "explanation": {"type": "string"},
+      "question": {"type": "string"}
+    }
+  }
+}

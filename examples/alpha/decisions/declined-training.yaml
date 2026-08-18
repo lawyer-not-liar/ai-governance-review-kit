@@ -1,0 +1,10 @@
+schema_version: "1.0"
+reviewer: Rowan Reviewer
+decision: declined
+decided_at: "2026-08-06T12:00:00Z"
+policy: {id: example-ai-use-policy, version: 0.1.0}
+conditions: []
+unresolved_risks: [Required training-data evidence was not supplied.]
+acknowledged_findings: [finding-EXAMPLE-DATA-2]
+overrides: []
+independent_review_confirmed: true

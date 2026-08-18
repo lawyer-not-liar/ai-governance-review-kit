@@ -1,0 +1,29 @@
+schema_version: "1.0"
+request:
+  id: alpha-consequential-1
+  title: Fictional scholarship application ranker
+  owner: {name: Gray Example, email: gray@example.invalid}
+purpose:
+  summary: Rank synthetic scholarship applications for reviewer prioritization.
+  intended_outcome: Suggest an initial review order without making awards.
+  affected_people: [fictional applicants]
+  deployment_scope: prototype
+system:
+  name: Example Application Ranker
+  provider: Example Systems
+  hosting: self_hosted
+  autonomy: human_in_the_loop
+  human_oversight: true
+data:
+  categories: [synthetic application responses]
+  personal_data: false
+  sensitive_data: false
+  training_or_fine_tuning: false
+  retention: Synthetic applications are deleted after testing.
+  cross_border_transfers: false
+outputs:
+  types: [priority scores]
+  recipients: [fictional selection reviewers]
+  external_distribution: false
+  decisions_influenced: [scholarship review priority]
+evidence: []

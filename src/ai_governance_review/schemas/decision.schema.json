@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/ai-governance-review-kit/schemas/decision.schema.json",
+  "title": "Human AI governance decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "reviewer", "decision", "decided_at", "policy", "conditions", "unresolved_risks", "acknowledged_findings", "overrides", "independent_review_confirmed"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "reviewer": {"type": "string", "minLength": 1},
+    "decision": {"enum": ["approved", "approved_with_conditions", "declined", "needs_information"]},
+    "decided_at": {"type": "string", "format": "date-time"},
+    "policy": {"type": "object", "additionalProperties": false, "required": ["id", "version"], "properties": {"id": {"type": "string"}, "version": {"type": "string"}}},
+    "conditions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "unresolved_risks": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "acknowledged_findings": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "overrides": {"type": "array", "items": {"type": "object", "additionalProperties": false, "required": ["finding_id", "rationale"], "properties": {"finding_id": {"type": "string", "minLength": 1}, "rationale": {"type": "string", "minLength": 1}}}},
+    "independent_review_confirmed": {"const": true}
+  }
+}

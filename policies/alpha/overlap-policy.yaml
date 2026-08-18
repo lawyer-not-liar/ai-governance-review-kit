@@ -1,0 +1,22 @@
+policy:
+  id: alpha-overlap-policy
+  version: 0.1.0
+  effective_date: "2026-01-01"
+  owner: Example Governance Committee
+  status: demonstration
+  jurisdiction_scope: [example-only]
+rules:
+  - id: ALPHA-PERMIT-ASSISTIVE
+    title: Assistive drafting signal
+    rationale: This fictional rule identifies assistive drafting as eligible for review.
+    severity: review
+    condition:
+      equals: {path: system.autonomy, value: assistive}
+    finding: The proposal uses an assistive operating model.
+  - id: ALPHA-RESTRICT-EXTERNAL
+    title: External publication restriction
+    rationale: This fictional rule blocks publication until a separate release decision.
+    severity: block
+    condition:
+      equals: {path: outputs.external_distribution, value: true}
+    finding: The proposal includes external publication.

@@ -1,0 +1,180 @@
+schema_version: "1.0"
+scenarios:
+  - id: low-risk-assistant
+    review_focus: A complete assistive use should remain eligible for human approval.
+    intake: examples/alpha/intakes/01-low-risk-assistant.yaml
+    decision: examples/decisions/example-decision.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+      open_questions: []
+      blocking_findings: []
+      decision: approved
+  - id: personal-data-missing-evidence
+    review_focus: A personal-data use without its required record must remain incomplete.
+    intake: examples/alpha/intakes/02-personal-data-missing-evidence.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: needs_information
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+      open_questions: [question-EXAMPLE-DATA-1]
+      blocking_findings: []
+  - id: personal-data-with-evidence
+    review_focus: Supplying the named data record should resolve the evidence gap without hiding review.
+    intake: examples/alpha/intakes/03-personal-data-with-evidence.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: triggered
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+      open_questions: []
+      blocking_findings: []
+  - id: training-missing-evidence
+    review_focus: Training without its source record must remain blocked and may be declined.
+    intake: examples/alpha/intakes/04-training-missing-evidence.yaml
+    decision: examples/alpha/decisions/declined-training.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: needs_information
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+      open_questions: [question-EXAMPLE-DATA-2]
+      blocking_findings: [finding-EXAMPLE-DATA-2]
+      decision: declined
+  - id: training-with-documented-override
+    review_focus: A supplied source record resolves information needs but the block still requires override.
+    intake: examples/alpha/intakes/05-training-with-evidence.yaml
+    decision: examples/alpha/decisions/approved-training-override.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: triggered
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+      open_questions: []
+      blocking_findings: [finding-EXAMPLE-DATA-2]
+      decision: approved
+  - id: external-distribution
+    review_focus: Publication controls must be answered before an external use can be approved.
+    intake: examples/alpha/intakes/06-external-distribution.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: triggered
+        EXAMPLE-OVERSIGHT-1: not_applicable
+      open_questions: [question-EXAMPLE-OUTPUT-1]
+      blocking_findings: []
+  - id: consequential-decision
+    review_focus: A consequential influence must surface both a block and an appeal question.
+    intake: examples/alpha/intakes/07-consequential-decision.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-IMPACT-1: triggered
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+      open_questions: [question-EXAMPLE-IMPACT-1]
+      blocking_findings: [finding-EXAMPLE-IMPACT-1]
+  - id: no-human-oversight
+    review_focus: Autonomous operation without oversight must surface intervention requirements.
+    intake: examples/alpha/intakes/08-no-human-oversight.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: triggered
+      open_questions: [question-EXAMPLE-OVERSIGHT-1]
+      blocking_findings: [finding-EXAMPLE-OVERSIGHT-1]
+  - id: unknown-material-facts
+    review_focus: Unknown deployment, autonomy, data, and distribution facts must not be inferred.
+    intake: examples/alpha/intakes/09-unknown-material-facts.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: triggered
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+      open_questions:
+        - question-EXAMPLE-COMPLETENESS-1
+        - unknown-data-cross_border_transfers
+        - unknown-data-personal_data
+        - unknown-data-sensitive_data
+        - unknown-data-training_or_fine_tuning
+        - unknown-outputs-external_distribution
+        - unknown-purpose-deployment_scope
+        - unknown-system-autonomy
+        - unknown-system-human_oversight
+      blocking_findings: []
+  - id: combined-high-risk-decline
+    review_focus: Multiple independent review and blocking signals must remain visible when declined.
+    intake: examples/alpha/intakes/10-combined-high-risk.yaml
+    decision: examples/alpha/decisions/declined-combined.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: triggered
+        EXAMPLE-DATA-1: triggered
+        EXAMPLE-DATA-2: triggered
+        EXAMPLE-IMPACT-1: triggered
+        EXAMPLE-OUTPUT-1: triggered
+        EXAMPLE-OVERSIGHT-1: triggered
+      open_questions:
+        - question-EXAMPLE-COMPLETENESS-1
+        - question-EXAMPLE-IMPACT-1
+        - question-EXAMPLE-OUTPUT-1
+        - question-EXAMPLE-OVERSIGHT-1
+        - semantic-system-human-oversight
+      blocking_findings:
+        - finding-EXAMPLE-DATA-2
+        - finding-EXAMPLE-IMPACT-1
+        - finding-EXAMPLE-OVERSIGHT-1
+      decision: declined
+  - id: overlapping-policy-signals
+    review_focus: The evaluator must preserve both permissive and restrictive signals without resolving them silently.
+    intake: examples/alpha/intakes/11-overlapping-policy-signals.yaml
+    policy: policies/alpha/overlap-policy.yaml
+    expected:
+      findings:
+        ALPHA-PERMIT-ASSISTIVE: triggered
+        ALPHA-RESTRICT-EXTERNAL: triggered
+      open_questions: []
+      blocking_findings: [finding-ALPHA-RESTRICT-EXTERNAL]
+  - id: personal-data-external-distribution
+    review_focus: Personal-data and external-publication controls must remain independently visible.
+    intake: examples/alpha/intakes/12-personal-data-external-distribution.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: needs_information
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: triggered
+        EXAMPLE-OVERSIGHT-1: not_applicable
+      open_questions: [question-EXAMPLE-DATA-1, question-EXAMPLE-OUTPUT-1]
+      blocking_findings: []

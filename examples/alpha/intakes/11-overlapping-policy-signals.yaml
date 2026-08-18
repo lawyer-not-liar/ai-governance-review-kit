@@ -1,0 +1,29 @@
+schema_version: "1.0"
+request:
+  id: alpha-overlap-1
+  title: Assistive external announcement drafter
+  owner: {name: Kai Example, email: kai@example.invalid}
+purpose:
+  summary: Draft a fictional announcement that an editor may publish.
+  intended_outcome: Demonstrate overlapping permissive and restrictive policy signals.
+  affected_people: [public demonstration visitors]
+  deployment_scope: external
+system:
+  name: Example Announcement Drafter
+  provider: Example Systems
+  hosting: managed_private
+  autonomy: assistive
+  human_oversight: true
+data:
+  categories: [fictional announcement facts]
+  personal_data: false
+  sensitive_data: false
+  training_or_fine_tuning: false
+  retention: Drafts are deleted after editorial review.
+  cross_border_transfers: false
+outputs:
+  types: [announcement draft]
+  recipients: [editors, public demonstration visitors]
+  external_distribution: true
+  decisions_influenced: []
+evidence: []
