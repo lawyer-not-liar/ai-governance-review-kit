@@ -2,7 +2,7 @@ schema_version: "1.0"
 reviewer: Rowan Reviewer
 decision: declined
 decided_at: "2026-08-06T12:00:00Z"
-policy: {id: example-ai-use-policy, version: 0.1.0}
+policy: {id: example-ai-use-policy, version: 0.2.0}
 conditions: []
 unresolved_risks:
   - Human oversight is absent.

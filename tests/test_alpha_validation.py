@@ -29,7 +29,41 @@ def test_alpha_runner_validates_all_golden_scenarios() -> None:
     )
 
     assert result.returncode == 0, result.stdout + result.stderr
-    assert "12/12 alpha scenarios passed." in result.stdout
+    assert "16/16 alpha scenarios passed." in result.stdout
+
+
+def test_alpha_scenarios_cover_new_starter_policy_dimensions() -> None:
+    scenarios = load_alpha_scenarios()
+    expected = {
+        "sensitive-data-missing-evidence": (
+            "EXAMPLE-DATA-3",
+            "needs_information",
+            "question-EXAMPLE-DATA-3",
+        ),
+        "cross-border-missing-evidence": (
+            "EXAMPLE-DATA-4",
+            "needs_information",
+            "question-EXAMPLE-DATA-4",
+        ),
+        "autonomous-missing-oversight-plan": (
+            "EXAMPLE-SYSTEM-1",
+            "needs_information",
+            "question-EXAMPLE-SYSTEM-1",
+        ),
+        "third-party-provider-with-evidence": (
+            "EXAMPLE-VENDOR-1",
+            "triggered",
+            None,
+        ),
+    }
+
+    for scenario_id, (rule_id, status, question_id) in expected.items():
+        scenario = scenarios[scenario_id]
+        assert scenario["expected"]["findings"][rule_id] == status
+        if question_id is None:
+            assert scenario["expected"]["open_questions"] == []
+        else:
+            assert question_id in scenario["expected"]["open_questions"]
 
 
 def test_alpha_scenarios_cover_non_training_personal_and_external_matrix() -> None:
@@ -124,7 +158,7 @@ def test_alpha_runner_writes_human_review_workbook(tmp_path: Path) -> None:
 
     assert result.returncode == 0, result.stdout + result.stderr
     report = report_path.read_text(encoding="utf-8")
-    assert report.count("## Scenario ") == 12
+    assert report.count("## Scenario ") == 16
     assert "### Generated draft assessment" in report
     assert "### Human usefulness scorecard" in report
 

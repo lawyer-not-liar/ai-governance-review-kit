@@ -47,9 +47,13 @@ def test_realistic_escalated_intake_produces_expected_review_matrix(example_poli
         "EXAMPLE-COMPLETENESS-1": "triggered",
         "EXAMPLE-DATA-1": "needs_information",
         "EXAMPLE-DATA-2": "triggered",
+        "EXAMPLE-DATA-3": "not_applicable",
+        "EXAMPLE-DATA-4": "not_applicable",
         "EXAMPLE-IMPACT-1": "triggered",
         "EXAMPLE-OUTPUT-1": "triggered",
         "EXAMPLE-OVERSIGHT-1": "triggered",
+        "EXAMPLE-SYSTEM-1": "not_applicable",
+        "EXAMPLE-VENDOR-1": "not_applicable",
     }
     assert [question["id"] for question in questions] == [
         "question-EXAMPLE-COMPLETENESS-1",

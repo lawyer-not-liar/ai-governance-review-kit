@@ -1,4 +1,4 @@
-"""Structured deterministic analysis shared by conversational and CLI surfaces."""
+"""Structured deterministic analysis shared by AI-assisted and CLI surfaces."""
 
 from .errors import ValidationError
 from .policy import evaluate_policy

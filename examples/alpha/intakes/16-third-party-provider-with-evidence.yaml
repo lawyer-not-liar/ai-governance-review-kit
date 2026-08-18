@@ -1,0 +1,32 @@
+schema_version: "1.0"
+request:
+  id: alpha-provider-complete-1
+  title: Third-party fictional drafting assistant
+  owner: {name: Quinn Example, email: quinn@example.invalid}
+purpose:
+  summary: Draft internal text from synthetic reference material.
+  intended_outcome: Help demonstration staff prepare editable drafts.
+  affected_people: [test staff]
+  deployment_scope: prototype
+system:
+  name: Example Hosted Drafter
+  provider: Example Cloud Provider
+  hosting: third_party
+  autonomy: assistive
+  human_oversight: true
+data:
+  categories: [synthetic reference material]
+  personal_data: false
+  sensitive_data: false
+  training_or_fine_tuning: false
+  retention: Synthetic inputs are deleted after processing.
+  cross_border_transfers: false
+outputs:
+  types: [draft text]
+  recipients: [test staff]
+  external_distribution: false
+  decisions_influenced: []
+evidence:
+  - id: provider-assessment
+    type: record
+    title: Fictional provider assessment

@@ -1,0 +1,29 @@
+schema_version: "1.0"
+request:
+  id: alpha-autonomous-plan-missing-1
+  title: Autonomous fictional schedule optimizer
+  owner: {name: Parker Example, email: parker@example.invalid}
+purpose:
+  summary: Reorder synthetic maintenance tasks without individual confirmation.
+  intended_outcome: Demonstrate autonomous scheduling in a sandbox.
+  affected_people: [test operators]
+  deployment_scope: prototype
+system:
+  name: Example Schedule Optimizer
+  provider: Example Systems
+  hosting: self_hosted
+  autonomy: autonomous
+  human_oversight: true
+data:
+  categories: [synthetic maintenance tasks]
+  personal_data: false
+  sensitive_data: false
+  training_or_fine_tuning: false
+  retention: Sandbox records are retained for seven days.
+  cross_border_transfers: false
+outputs:
+  types: [synthetic schedules]
+  recipients: [sandbox system]
+  external_distribution: false
+  decisions_influenced: []
+evidence: []

@@ -29,7 +29,17 @@ def test_skill_frontmatter_is_focused_and_cross_host_compatible() -> None:
     assert metadata["name"] == "ai-governance-review"
     assert len(metadata["description"]) <= 200
     assert "generic" in metadata["description"].lower()
+    assert "ai-assisted" in metadata["description"].lower()
     assert "human" in body.lower()
+
+
+def test_skill_ui_metadata_presents_ai_assisted_governance_review() -> None:
+    metadata = yaml.safe_load((SKILL / "agents/openai.yaml").read_text(encoding="utf-8"))
+    interface = metadata["interface"]
+
+    assert interface["display_name"] == "AI-Assisted Governance Review"
+    assert interface["short_description"] == "AI-assisted review with a generic policy"
+    assert interface["default_prompt"].startswith("Use $ai-governance-review")
 
 
 def test_skill_generic_policy_matches_canonical_example() -> None:
@@ -131,13 +141,20 @@ def test_skill_surfaces_contradictory_facts_before_analysis() -> None:
     assert "ask which statement is correct" in skill
 
 
-def test_skill_defines_deterministic_presentation_contract() -> None:
+def test_skill_keeps_canonical_result_intact_before_bounded_ai_assistance() -> None:
     skill = (SKILL / "SKILL.md").read_text(encoding="utf-8").lower()
 
     expected = (
         "presentation_facts",
         "presentation_text",
-        "reproduce `presentation_text` verbatim",
+        "canonical result block",
+        "first and unchanged",
+        "ai-assisted discussion",
+        "only active findings, supplied facts, and open questions",
+        "one highest-impact open question",
+        "do not create a new finding",
+        "do not change a finding's status or severity",
+        "do not imply approval or rejection",
         "<presentation_facts.active_findings.total>",
         "<presentation_facts.active_findings.triggered>",
         "<presentation_facts.active_findings.needs_information>",
@@ -147,7 +164,6 @@ def test_skill_defines_deterministic_presentation_contract() -> None:
         "do not summarize `not_applicable`",
         "do not mention, enumerate, characterize, or describe inactive checks",
         "remove every clause or sentence that refers to a finding outside the active statuses",
-        "or offer to list those findings",
         "explicitly asks to inspect all evaluated checks",
         "compact result card is unavailable",
     )

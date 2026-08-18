@@ -46,9 +46,9 @@ jobs:
         run: python scripts/run_alpha_validation.py --root .
       - name: Build
         run: python -m build
-      - name: Build conversational skill
+      - name: Build AI-assisted review skill
         run: python scripts/build_skill_bundle.py --root . --output dist/ai-governance-review-skill.zip
-      - name: Verify conversational skill
+      - name: Verify AI-assisted review skill
         run: python scripts/build_skill_bundle.py --root . --output dist/ai-governance-review-skill.zip --verify
       - name: Installed wheel smoke test
         run: |

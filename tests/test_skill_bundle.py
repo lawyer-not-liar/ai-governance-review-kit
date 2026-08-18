@@ -93,8 +93,8 @@ def test_bundle_has_one_safe_root_and_verified_manifest(tmp_path: Path) -> None:
         }
         assert manifest["schema_version"] == "1.0"
         assert manifest["skill"] == ARCHIVE_ROOT
-        assert manifest["skill_version"] == "0.1.2"
-        assert manifest["engine_version"] == "0.1.2"
+        assert manifest["skill_version"] == "0.1.3"
+        assert manifest["engine_version"] == "0.1.3"
         canonical_policy = yaml.safe_load(
             (ROOT / "policies/example/policy.yaml").read_text(encoding="utf-8")
         )
@@ -198,7 +198,7 @@ def test_extracted_bundle_runs_from_runtime_outside_repository(tmp_path: Path) -
     assert analysis.returncode == 0
     payload = json.loads(analysis.stdout)
     assert payload["ok"] is True
-    assert len(payload["result"]["findings"]) == 6
+    assert len(payload["result"]["findings"]) == 10
     assert analysis.stderr == ""
     assert invalid_analysis.returncode == 2
     assert json.loads(invalid_analysis.stdout)["error"]["kind"] == "validation"

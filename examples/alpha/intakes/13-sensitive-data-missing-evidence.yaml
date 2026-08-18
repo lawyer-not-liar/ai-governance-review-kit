@@ -1,0 +1,29 @@
+schema_version: "1.0"
+request:
+  id: alpha-sensitive-missing-1
+  title: Fictional wellness-message classifier
+  owner: {name: Nova Example, email: nova@example.invalid}
+purpose:
+  summary: Classify synthetic wellness messages for a demonstration queue.
+  intended_outcome: Help test reviewers prioritize fictional messages.
+  affected_people: [fictional participants]
+  deployment_scope: prototype
+system:
+  name: Example Wellness Classifier
+  provider: Example Systems
+  hosting: managed_private
+  autonomy: assistive
+  human_oversight: true
+data:
+  categories: [synthetic wellness messages]
+  personal_data: false
+  sensitive_data: true
+  training_or_fine_tuning: false
+  retention: Synthetic messages are deleted after the demonstration.
+  cross_border_transfers: false
+outputs:
+  types: [priority labels]
+  recipients: [test reviewers]
+  external_distribution: false
+  decisions_influenced: []
+evidence: []
