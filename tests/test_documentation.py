@@ -109,6 +109,7 @@ def test_first_run_prompt_supplies_material_routing_facts() -> None:
     assert all(
         fact in verification
         for fact in (
+            "deployment scope is internal",
             "personal or sensitive data",
             "training or fine-tuning",
             "cross-border transfers",

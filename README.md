@@ -122,7 +122,8 @@ Use a fictional, low-sensitivity example for the first check:
 Use the AI-Assisted Governance Review skill. Review a proposed internal assistant that
 summarizes fictional support tickets for a human agent. The affected people are
 the fictional customers whose tickets are summarized and the support agents
-who use it. It will run in managed private hosting, use no personal or sensitive data,
+who use it. The deployment scope is internal. It will run in managed private hosting,
+use no personal or sensitive data,
 and retain inputs for 30 days. The use involves no training or fine-tuning and
 no cross-border transfers.
 There is no external distribution and no decisions about people. A human agent
