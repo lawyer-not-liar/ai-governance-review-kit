@@ -1,4 +1,4 @@
-# Conversational AI Governance Review Skill
+# AI-Assisted Governance Review Skill
 
 This is the ordinary attorney path for a proposed AI use. The skill asks for
 material facts, runs a deterministic review, and returns a draft assessment
@@ -18,10 +18,13 @@ or verify evidence.
 The skill asks one material question at a time. It applies the included
 illustrative generic policy through the Python engine. The draft is a review
 aid, not an approval, rejection, evidence verification, or final decision.
-The ordinary result reproduces engine-rendered presentation text. That text
-uses engine-supplied presentation facts and focuses on active findings. It shows
-inactive checks only when you ask to inspect every evaluated check. The default
-answer does not mention inactive checks.
+The ordinary result presents the engine-rendered presentation text as the
+canonical result block first and unchanged. That text uses engine-supplied
+presentation facts and focuses on active findings. It shows inactive checks only
+when you ask to inspect every evaluated check. The default answer does not
+mention inactive checks. A clearly labeled AI-assisted discussion may explain
+active findings or ask the highest-impact open question, but it cannot create
+findings, change status or severity, or imply a decision.
 
 A successful review begins with a compact result card showing whether the
 deterministic engine ran, the illustrative policy and version, active-finding
@@ -85,8 +88,8 @@ $ai-governance-review Review this proposed AI use.
 
 Keep the reviewed ZIP intact. Enable code execution and file creation, open
 **Customize > Skills**, select **+**, then **+ Create skill**, choose
-**Upload a skill**, upload the ZIP, and enable **AI Governance Review**. Start a
-new conversation and use the opening prompt above.
+**Upload a skill**, upload the ZIP, and enable the uploaded AI governance review
+skill. Start a new conversation and use the opening prompt above.
 
 ### Maintainer build from a source checkout
 

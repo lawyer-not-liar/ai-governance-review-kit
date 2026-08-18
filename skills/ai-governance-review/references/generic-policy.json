@@ -1,7 +1,7 @@
 {
   "policy": {
     "id": "example-ai-use-policy",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "effective_date": "2026-01-01",
     "owner": "Example Governance Committee",
     "status": "demonstration",
@@ -23,6 +23,23 @@
       },
       "finding": "The intake states that human oversight is absent.",
       "question": "Identify who can review and intervene in the system's operation."
+    },
+    {
+      "id": "EXAMPLE-SYSTEM-1",
+      "title": "Autonomous-operation review",
+      "rationale": "This fictional policy requires an oversight plan for autonomous operation.",
+      "severity": "block",
+      "condition": {
+        "equals": {
+          "path": "system.autonomy",
+          "value": "autonomous"
+        }
+      },
+      "finding": "The proposed system is described as autonomous.",
+      "required_evidence": [
+        "oversight-plan"
+      ],
+      "question": "Provide the fictional organization's oversight and intervention plan."
     },
     {
       "id": "EXAMPLE-DATA-1",
@@ -57,6 +74,40 @@
         "training-data-record"
       ],
       "question": "Provide the fictional organization's training-data record."
+    },
+    {
+      "id": "EXAMPLE-DATA-3",
+      "title": "Sensitive-data review",
+      "rationale": "This fictional policy sends sensitive-data uses to a specialist review.",
+      "severity": "review",
+      "condition": {
+        "equals": {
+          "path": "data.sensitive_data",
+          "value": true
+        }
+      },
+      "finding": "The proposed use includes sensitive data.",
+      "required_evidence": [
+        "sensitive-data-assessment"
+      ],
+      "question": "Provide the fictional organization's sensitive-data assessment."
+    },
+    {
+      "id": "EXAMPLE-DATA-4",
+      "title": "Cross-border transfer review",
+      "rationale": "This fictional policy requires an assessment of cross-border data transfers.",
+      "severity": "review",
+      "condition": {
+        "equals": {
+          "path": "data.cross_border_transfers",
+          "value": true
+        }
+      },
+      "finding": "The proposed use includes cross-border data transfers.",
+      "required_evidence": [
+        "transfer-assessment"
+      ],
+      "question": "Provide the fictional organization's transfer assessment."
     },
     {
       "id": "EXAMPLE-OUTPUT-1",
@@ -101,6 +152,23 @@
       },
       "finding": "The hosting environment is unknown.",
       "question": "Identify where the system runs and who operates it."
+    },
+    {
+      "id": "EXAMPLE-VENDOR-1",
+      "title": "Third-party provider review",
+      "rationale": "This fictional policy requires a provider assessment for third-party hosting.",
+      "severity": "review",
+      "condition": {
+        "equals": {
+          "path": "system.hosting",
+          "value": "third_party"
+        }
+      },
+      "finding": "The proposed system will use third-party hosting.",
+      "required_evidence": [
+        "provider-assessment"
+      ],
+      "question": "Provide the fictional organization's provider assessment."
     }
   ]
 }

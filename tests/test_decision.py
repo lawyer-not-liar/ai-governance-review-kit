@@ -24,7 +24,7 @@ def _decision(**changes):
         "reviewer": "Jordan Reviewer",
         "decision": "approved",
         "decided_at": "2026-08-05T13:00:00Z",
-        "policy": {"id": "example-ai-use-policy", "version": "0.1.0"},
+        "policy": {"id": "example-ai-use-policy", "version": "0.2.0"},
         "conditions": [],
         "unresolved_risks": [],
         "acknowledged_findings": [],
@@ -180,6 +180,16 @@ def test_override_requires_non_whitespace_rationale(tmp_path, example_policy):
 
     with pytest.raises(ValidationError, match="non-empty rationale"):
         record_decision(run_dir, decision)
+
+
+def test_override_rejects_non_string_finding_id(tmp_path, example_policy):
+    run_dir = _bundle(tmp_path, example_policy, "intake-missing-evidence.yaml")
+    decision = _decision(overrides=[{"finding_id": 42, "rationale": "Example rationale."}])
+
+    with pytest.raises(ValidationError, match="finding_id"):
+        record_decision(run_dir, decision)
+
+    assert not (run_dir / "human-decision.json").exists()
 
 
 def test_existing_decision_is_append_protected(tmp_path, example_policy):

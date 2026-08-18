@@ -30,16 +30,16 @@ def test_analyze_review_returns_traceable_structured_result() -> None:
     assert result["schema_version"] == "1.0"
     assert result["policy"] == {
         "id": "example-ai-use-policy",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "status": "demonstration",
     }
     assert result["blocking_findings"] == []
     assert result["open_questions"] == []
-    assert len(result["findings"]) == 6
+    assert len(result["findings"]) == 10
     assert result["presentation_facts"] == {
         "policy": {
             "id": "example-ai-use-policy",
-            "version": "0.1.0",
+            "version": "0.2.0",
             "status": "demonstration",
         },
         "active_findings": {

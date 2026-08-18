@@ -9,9 +9,13 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: not_applicable
         EXAMPLE-DATA-1: not_applicable
         EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: not_applicable
         EXAMPLE-OUTPUT-1: not_applicable
         EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions: []
       blocking_findings: []
       decision: approved
@@ -23,9 +27,13 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: not_applicable
         EXAMPLE-DATA-1: needs_information
         EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: not_applicable
         EXAMPLE-OUTPUT-1: not_applicable
         EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions: [question-EXAMPLE-DATA-1]
       blocking_findings: []
   - id: personal-data-with-evidence
@@ -36,9 +44,13 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: not_applicable
         EXAMPLE-DATA-1: triggered
         EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: not_applicable
         EXAMPLE-OUTPUT-1: not_applicable
         EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions: []
       blocking_findings: []
   - id: training-missing-evidence
@@ -50,9 +62,13 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: not_applicable
         EXAMPLE-DATA-1: not_applicable
         EXAMPLE-DATA-2: needs_information
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: not_applicable
         EXAMPLE-OUTPUT-1: not_applicable
         EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions: [question-EXAMPLE-DATA-2]
       blocking_findings: [finding-EXAMPLE-DATA-2]
       decision: declined
@@ -65,9 +81,13 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: not_applicable
         EXAMPLE-DATA-1: not_applicable
         EXAMPLE-DATA-2: triggered
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: not_applicable
         EXAMPLE-OUTPUT-1: not_applicable
         EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions: []
       blocking_findings: [finding-EXAMPLE-DATA-2]
       decision: approved
@@ -79,9 +99,13 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: not_applicable
         EXAMPLE-DATA-1: not_applicable
         EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: not_applicable
         EXAMPLE-OUTPUT-1: triggered
         EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions: [question-EXAMPLE-OUTPUT-1]
       blocking_findings: []
   - id: consequential-decision
@@ -92,9 +116,13 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: not_applicable
         EXAMPLE-DATA-1: not_applicable
         EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: triggered
         EXAMPLE-OUTPUT-1: not_applicable
         EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions: [question-EXAMPLE-IMPACT-1]
       blocking_findings: [finding-EXAMPLE-IMPACT-1]
   - id: no-human-oversight
@@ -105,11 +133,15 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: not_applicable
         EXAMPLE-DATA-1: not_applicable
         EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: not_applicable
         EXAMPLE-OUTPUT-1: not_applicable
         EXAMPLE-OVERSIGHT-1: triggered
-      open_questions: [question-EXAMPLE-OVERSIGHT-1]
-      blocking_findings: [finding-EXAMPLE-OVERSIGHT-1]
+        EXAMPLE-SYSTEM-1: needs_information
+        EXAMPLE-VENDOR-1: not_applicable
+      open_questions: [question-EXAMPLE-OVERSIGHT-1, question-EXAMPLE-SYSTEM-1]
+      blocking_findings: [finding-EXAMPLE-OVERSIGHT-1, finding-EXAMPLE-SYSTEM-1]
   - id: unknown-material-facts
     review_focus: Unknown deployment, autonomy, data, and distribution facts must not be inferred.
     intake: examples/alpha/intakes/09-unknown-material-facts.yaml
@@ -118,9 +150,13 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: triggered
         EXAMPLE-DATA-1: not_applicable
         EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: not_applicable
         EXAMPLE-OUTPUT-1: not_applicable
         EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions:
         - question-EXAMPLE-COMPLETENESS-1
         - unknown-data-cross_border_transfers
@@ -141,9 +177,13 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: triggered
         EXAMPLE-DATA-1: triggered
         EXAMPLE-DATA-2: triggered
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: triggered
         EXAMPLE-OUTPUT-1: triggered
         EXAMPLE-OVERSIGHT-1: triggered
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions:
         - question-EXAMPLE-COMPLETENESS-1
         - question-EXAMPLE-IMPACT-1
@@ -173,8 +213,80 @@ scenarios:
         EXAMPLE-COMPLETENESS-1: not_applicable
         EXAMPLE-DATA-1: needs_information
         EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
         EXAMPLE-IMPACT-1: not_applicable
         EXAMPLE-OUTPUT-1: triggered
         EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
       open_questions: [question-EXAMPLE-DATA-1, question-EXAMPLE-OUTPUT-1]
+      blocking_findings: []
+  - id: sensitive-data-missing-evidence
+    review_focus: Sensitive data without its assessment must remain incomplete.
+    intake: examples/alpha/intakes/13-sensitive-data-missing-evidence.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: needs_information
+        EXAMPLE-DATA-4: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
+      open_questions: [question-EXAMPLE-DATA-3]
+      blocking_findings: []
+  - id: cross-border-missing-evidence
+    review_focus: Cross-border transfers without an assessment must remain incomplete.
+    intake: examples/alpha/intakes/14-cross-border-missing-evidence.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: needs_information
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: not_applicable
+      open_questions: [question-EXAMPLE-DATA-4]
+      blocking_findings: []
+  - id: autonomous-missing-oversight-plan
+    review_focus: Autonomous operation must remain blocked until its oversight plan is supplied.
+    intake: examples/alpha/intakes/15-autonomous-missing-oversight-plan.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: needs_information
+        EXAMPLE-VENDOR-1: not_applicable
+      open_questions: [question-EXAMPLE-SYSTEM-1]
+      blocking_findings: [finding-EXAMPLE-SYSTEM-1]
+  - id: third-party-provider-with-evidence
+    review_focus: A provider assessment should resolve the evidence gap while preserving review.
+    intake: examples/alpha/intakes/16-third-party-provider-with-evidence.yaml
+    expected:
+      findings:
+        EXAMPLE-COMPLETENESS-1: not_applicable
+        EXAMPLE-DATA-1: not_applicable
+        EXAMPLE-DATA-2: not_applicable
+        EXAMPLE-DATA-3: not_applicable
+        EXAMPLE-DATA-4: not_applicable
+        EXAMPLE-IMPACT-1: not_applicable
+        EXAMPLE-OUTPUT-1: not_applicable
+        EXAMPLE-OVERSIGHT-1: not_applicable
+        EXAMPLE-SYSTEM-1: not_applicable
+        EXAMPLE-VENDOR-1: triggered
+      open_questions: []
       blocking_findings: []

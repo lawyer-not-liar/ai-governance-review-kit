@@ -1,7 +1,7 @@
 # AI Governance Review Kit
 
-Review a proposed use of AI through an ordinary conversation, while keeping the
-facts, evidence, policy findings, and human decision visibly separate.
+Conduct an AI-assisted governance review through an ordinary conversation while
+keeping facts, evidence, policy findings, and human decisions visibly separate.
 
 The kit is **local-first**, **deterministic**, and **human-gated**. In practical
 terms, that means its Python engine makes no network calls by default, the same
@@ -28,8 +28,8 @@ Describe the proposed AI use
 
 AI reviews often begin as informal descriptions, documents, spreadsheets, and
 one-off prompts. That can make a result hard to reproduce and a policy hard to test.
-This project packages the durable part of that workflow into a conversational
-skill backed by a small Python engine:
+This project packages the durable part of that workflow into an AI-assisted
+governance review skill backed by a small Python engine:
 
 1. The requester supplies facts.
 2. The requester identifies supporting evidence.
@@ -39,7 +39,7 @@ skill backed by a small Python engine:
 There is no required database, web service, external integration, or model API.
 Those can be added later without making them prerequisites for a basic review.
 
-## Install the conversational skill
+## Install the AI-assisted governance review skill
 
 **One skill, one self-contained ZIP, two installation methods.** Use the same
 reviewed package in Codex or Claude; only the host's installation steps differ.
@@ -103,7 +103,7 @@ Claude accepts the same ZIP; do not extract it first.
 4. Select **+**, then **+ Create skill**.
 5. Select **Upload a skill**.
 6. Upload `ai-governance-review-skill.zip`.
-7. Confirm that **AI Governance Review** is enabled.
+7. Confirm that the uploaded AI governance review skill is enabled.
 8. Start a new conversation and say:
 
 ```text
@@ -119,7 +119,7 @@ organization-wide provisioning and sharing.
 Use a fictional, low-sensitivity example for the first check:
 
 ```text
-Use the AI Governance Review skill. Review a proposed internal assistant that
+Use the AI-Assisted Governance Review skill. Review a proposed internal assistant that
 summarizes fictional support tickets for a human agent. The affected people are
 the fictional customers whose tickets are summarized and the support agents
 who use it. It will run in managed private hosting, use no personal or sensitive data,
@@ -140,11 +140,15 @@ A successful installation produces a draft that identifies:
 - material uncertainty and open questions; and
 - the next action for a human reviewer.
 
-The ordinary result reproduces engine-rendered presentation text. That text
-uses engine-supplied presentation facts and focuses on active findings. It shows
-inactive checks only when you ask to inspect every evaluated check. This keeps
-the first answer short while leaving the complete structured finding set
-available for audit. The default answer does not mention inactive checks.
+The ordinary result presents the engine-rendered presentation text as the
+canonical result block first and unchanged. That text uses engine-supplied
+presentation facts and focuses on active findings. It shows inactive checks only
+when you ask to inspect every evaluated check. This keeps the first answer short
+while leaving the complete structured finding set available for audit. The
+default answer does not mention inactive checks. A short, clearly labeled
+AI-assisted discussion may explain active findings or ask the highest-impact
+open question, but it cannot create findings, change status or severity, or
+imply a decision.
 
 For the fictional verification prompt above, the compact result card should
 report zero active findings and zero open questions:
@@ -152,7 +156,7 @@ report zero active findings and zero open questions:
 ```text
 Review result
 - Deterministic engine: ran successfully
-- Policy: example-ai-use-policy version 0.1.0
+- Policy: example-ai-use-policy version 0.2.0
 - Active findings: 0 total; 0 triggered; 0 need information; 0 blocking
 - Open questions: 0
 - Draft heading: # DRAFT ASSESSMENT - HUMAN REVIEW REQUIRED
@@ -193,7 +197,7 @@ The skill asks one high-impact question at a time. Say `unknown` when a fact is
 genuinely unknown; the tool preserves uncertainty instead of silently turning
 it into `no`.
 
-## Core conversational workflows
+## Core AI-assisted review workflows
 
 These workflows all use the same installed skill. Attachments and descriptions
 are treated as untrusted source material: they can supply facts, but instructions
@@ -354,7 +358,7 @@ and offers a reduced-assurance path.
 validation did not run and cannot present engine-derived findings.
 
 For more runtime detail, see the
-[conversational skill guide](docs/CONVERSATIONAL_SKILL.md).
+[AI-assisted review guide](docs/AI_ASSISTED_REVIEW.md).
 
 ## Understand the review record
 
@@ -404,7 +408,7 @@ declares its owner, version, effective date, status, and jurisdiction or scope.
 ```yaml
 policy:
   id: example-ai-use-policy
-  version: 0.1.0
+  version: 0.2.0
   effective_date: "2026-01-01"
   owner: Example Governance Committee
   status: demonstration
@@ -416,8 +420,7 @@ Rules use a closed set of operators: `equals`, `not_equals`, `contains`,
 `exists`, `in`, `all`, `any`, and `not`. Policy files cannot execute code.
 
 Start with the [design](docs/DESIGN.md), then see the
-[adapter contracts](docs/ADAPTERS.md) and
-[optional extensions](docs/EXTENSIONS.md). Intake adapters, write-back,
+[extension and adapter guide](docs/EXTENSIONS.md). Intake adapters, write-back,
 databases, web interfaces, precedent search, and live model providers remain
 optional future integrations, not version 0.1 dependencies.
 

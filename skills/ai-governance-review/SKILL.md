@@ -1,9 +1,9 @@
 ---
 name: ai-governance-review
-description: Review proposed AI uses conversationally using deterministic generic-policy analysis, evidence-gap questions, and a human-gated draft assessment.
+description: Use when reviewing a proposed AI use or discussing its evidence gaps through an AI-assisted, human-gated generic-policy assessment.
 ---
 
-# AI Governance Review
+# AI-Assisted Governance Review
 
 Use this skill to prepare a generic-policy review of a proposed AI use. It produces a draft assessment; it does not approve, reject, verify evidence, or replace a human decision-maker.
 
@@ -25,13 +25,15 @@ If no supported interpreter is available or self-check reports that the runtime 
 5. Ask the highest-impact missing question one question at a time. Do not ask for information that does not materially affect the analysis.
 6. Run `<python-launcher> scripts/review_ai_use.py analyze --intake <temporary-json>`. Treat a nonzero exit or an output with `"ok": false` as failure: stop on runner failure and do not reconstruct findings.
 7. Rerun the analysis after a material answer changes the intake.
-8. Present a successful result by reproducing the runner's `presentation_text` verbatim as described below.
-9. Only after presenting the draft, offer decision discussion or export. Require an explicit human decision, and document every override of a blocking finding; do not infer approval.
+8. Present a successful result with the canonical result block and bounded AI-assisted discussion described below.
+9. After presenting the draft, help the user resolve open questions, understand active findings, discuss a human decision, or export. Require an explicit human decision, and document every override of a blocking finding; do not infer approval.
 10. After completion, cancellation, or unrecoverable runner failure, perform best-effort deletion of the entire task-specific temporary directory. Retain only an export the user explicitly requested, at the user's chosen destination.
 
-## Presenting successful results
+## Presenting and discussing successful results
 
-After a runner output with `"ok": true`, reproduce `presentation_text` verbatim as the entire default response. Do not add a preface, footer, summary, examples, recommendations, or an offer to expand it. The engine generated `presentation_text` from active findings only, and it already includes the required result card, active-finding explanation, open questions, boundaries, and next human action.
+### Canonical result block
+
+After a runner output with `"ok": true`, reproduce `presentation_text` verbatim first and unchanged as the canonical result block. Add no preface. The engine generated this block from active findings and supplied facts; it includes the result card, active-finding explanation, open questions, boundaries, and next human action.
 
 The engine-generated text begins with this compact result card in this order:
 
@@ -48,7 +50,25 @@ Copy every value by reproducing `presentation_text` verbatim. The engine copied 
 
 Do not summarize `not_applicable` findings in the default response. Do not mention, enumerate, characterize, or describe inactive checks or the facts that make them inactive. If the user explicitly asks to inspect all evaluated checks, list each raw finding with its runner-provided status. Do not introduce a total or category count that is absent from `presentation_facts`.
 
-Before sending a successful default response, perform a mandatory final presentation check. Unless the user explicitly requested all evaluated checks, remove every clause or sentence that refers to a finding outside the active statuses, whether individually or collectively. Do not state that those findings exist, describe the facts behind them, or offer to list those findings. The final response must equal `presentation_text`.
+### AI-assisted discussion
+
+When an active finding or open question would benefit from explanation, append this section after the complete canonical result block:
+
+```text
+AI-assisted discussion
+
+What it means
+<one concise explanation based on only active findings, supplied facts, and open questions>
+
+Next question
+<one highest-impact open question, using the runner's question text>
+```
+
+Omit `Next question` when no open question remains. Omit the entire section when it would merely repeat the canonical result. In later turns, explain active findings, clarify the evidence requested by the policy, help the user answer open questions, and discuss options for the human decision.
+
+The AI-assisted discussion is explanatory assistance, not another analysis layer. Do not create a new finding. Do not change a finding's status or severity. Do not calculate or restate quantitative totals. Do not treat referenced evidence as verified. Do not imply approval or rejection. Keep uncertainty visible, and distinguish policy requirements from practical suggestions.
+
+Before sending a successful response, perform a mandatory final presentation check. Confirm that the canonical result block equals `presentation_text`. Unless the user explicitly requested all evaluated checks, remove every clause or sentence that refers to a finding outside the active statuses. Apply this check to the AI-assisted discussion whether it refers to those findings individually or collectively. Do not mention, enumerate, characterize, or describe inactive checks or the facts that make them inactive.
 
 If `presentation_text` or `presentation_facts` is missing or malformed, state that the compact result card is unavailable. You may present `draft_assessment` verbatim, but do not reconstruct quantitative claims.
 

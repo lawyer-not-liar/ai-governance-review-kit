@@ -4,13 +4,14 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parents[1]
 
 
-def test_readme_leads_with_conversational_skill() -> None:
+def test_readme_leads_with_ai_assisted_governance_review() -> None:
     readme = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
 
-    assert readme.index("## Install the conversational skill") < readme.index(
+    assert readme.index("## Install the AI-assisted governance review skill") < readme.index(
         "## Use the Python engine directly"
     )
-    assert "docs/CONVERSATIONAL_SKILL.md" in readme
+    assert "## Core AI-assisted review workflows" in readme
+    assert "docs/AI_ASSISTED_REVIEW.md" in readme
     assert "illustrative" in readme.lower()
 
 
@@ -33,6 +34,7 @@ def test_readme_presents_one_skill_for_codex_and_claude_before_python() -> None:
     python = readme.index("## Use the Python engine directly")
 
     assert "one self-contained ZIP" in readme
+    assert "AI-assisted governance review skill" in readme
     assert codex < python
     assert claude < python
     assert "$ai-governance-review" in readme
@@ -40,7 +42,7 @@ def test_readme_presents_one_skill_for_codex_and_claude_before_python() -> None:
     assert "Review this proposed AI use." in readme
 
 
-def test_readme_covers_each_supported_conversational_workflow() -> None:
+def test_readme_covers_each_supported_ai_assisted_workflow() -> None:
     readme = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8")
     workflows = {
         "Review a short description",
@@ -108,7 +110,7 @@ def test_alpha_workbook_is_not_presented_as_attorney_interface() -> None:
 
 
 def test_maintainer_runtime_guide_reuses_supported_python_launcher() -> None:
-    raw_guide = (PROJECT_ROOT / "docs/CONVERSATIONAL_SKILL.md").read_text(encoding="utf-8")
+    raw_guide = (PROJECT_ROOT / "docs/AI_ASSISTED_REVIEW.md").read_text(encoding="utf-8")
     guide = " ".join(raw_guide.lower().split())
 
     assert "python 3.11 or newer" in guide
@@ -136,7 +138,7 @@ def test_attorney_guides_explain_the_accurate_default_result() -> None:
     documents = (
         " ".join((PROJECT_ROOT / "README.md").read_text(encoding="utf-8").lower().split()),
         " ".join(
-            (PROJECT_ROOT / "docs/CONVERSATIONAL_SKILL.md")
+            (PROJECT_ROOT / "docs/AI_ASSISTED_REVIEW.md")
             .read_text(encoding="utf-8")
             .lower()
             .split()
@@ -149,20 +151,23 @@ def test_attorney_guides_explain_the_accurate_default_result() -> None:
         "focuses on active findings",
         "inactive checks only when you ask",
         "does not mention inactive checks",
+        "canonical result block first and unchanged",
+        "ai-assisted discussion",
+        "cannot create findings, change status or severity, or imply a decision",
     )
     assert all(requirement in document for document in documents for requirement in expected)
 
 
 def test_readme_verification_prompt_supplies_required_review_facts() -> None:
     readme = (PROJECT_ROOT / "README.md").read_text(encoding="utf-8").lower()
-    prompt = readme.split("use the ai governance review skill.", 1)[1].split("```", 1)[0]
+    prompt = readme.split("use the ai-assisted governance review skill.", 1)[1].split("```", 1)[0]
 
     assert "assistive" in prompt
     assert "affected people" in prompt
 
 
 def test_detailed_guide_uses_one_portable_zip_for_both_hosts() -> None:
-    guide = (PROJECT_ROOT / "docs/CONVERSATIONAL_SKILL.md").read_text(encoding="utf-8")
+    guide = (PROJECT_ROOT / "docs/AI_ASSISTED_REVIEW.md").read_text(encoding="utf-8")
 
     assert "same self-contained ZIP" in guide
     assert "~/.agents/skills" in guide
@@ -173,7 +178,7 @@ def test_detailed_guide_uses_one_portable_zip_for_both_hosts() -> None:
 
 
 def test_example_models_one_highest_impact_question_per_turn() -> None:
-    guide = (PROJECT_ROOT / "docs/CONVERSATIONAL_SKILL.md").read_text(encoding="utf-8")
+    guide = (PROJECT_ROOT / "docs/AI_ASSISTED_REVIEW.md").read_text(encoding="utf-8")
     example = guide.split("```text", 1)[1].split("```", 1)[0]
     skill_turns = [turn for turn in example.split("\n\n") if turn.startswith("Skill:")]
     question_turns = [turn for turn in skill_turns if "?" in turn]
@@ -206,3 +211,14 @@ def test_readme_markdown_links_resolve():
     missing = sorted(link for link in local_links if not (PROJECT_ROOT / link).exists())
 
     assert missing == []
+
+
+def test_extension_guide_consolidates_adapter_contracts() -> None:
+    extensions = (PROJECT_ROOT / "docs/EXTENSIONS.md").read_text(encoding="utf-8")
+
+    assert not (PROJECT_ROOT / "docs/ADAPTERS.md").exists()
+    assert "## Adapter contracts" in extensions
+    assert "## Intake adapter" in extensions
+    assert "## Evidence adapter" in extensions
+    assert "## Narrative provider" in extensions
+    assert "## Write-back adapter" in extensions

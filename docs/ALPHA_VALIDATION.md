@@ -37,6 +37,10 @@ The corpus covers:
 10. Multiple simultaneous risks and a decline.
 11. Overlapping permissive and restrictive policy signals.
 12. Personal data combined with external distribution and missing supporting records.
+13. Sensitive data with missing assessment evidence.
+14. Cross-border transfers with missing assessment evidence.
+15. Autonomous operation with no supplied oversight plan.
+16. Third-party hosting with a supplied provider assessment.
 
 The low-risk, personal-data missing-evidence, external-distribution, and combined
 personal-data/external-distribution scenarios cover all four combinations of
@@ -56,9 +60,9 @@ review focus, golden expectation, draft assessment, and a scorecard. Reviewers
 score factual accuracy, policy traceability, question quality, proportionality,
 actionability, and false confidence from 1 to 5, then mark the scenario Accept,
 Revise, or Reject. Ordinary attorney users do not need to generate or complete
-this workbook to use the conversational skill.
+this workbook to use the AI-assisted governance review skill.
 
-## Private-release gate
+## Release gate
 
 Before changing repository visibility or describing the kit as ready for
 general use:

@@ -1,4 +1,4 @@
 interface:
-  display_name: "AI Governance Review"
-  short_description: "Review proposed AI uses with a generic policy"
-  default_prompt: "Review this proposed AI use and ask only for material missing information."
+  display_name: "AI-Assisted Governance Review"
+  short_description: "AI-assisted review with a generic policy"
+  default_prompt: "Use $ai-governance-review to review this proposed AI use and ask only for material missing information."

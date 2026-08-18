@@ -61,14 +61,18 @@ def test_analyze_emits_complete_deterministic_result_without_project_pythonpath(
     result = payload["result"]
     assert isinstance(result, dict)
     assert result["blocking_findings"] == []
-    assert len(result["findings"]) == 6
+    assert len(result["findings"]) == 10
     assert {finding["rule_id"] for finding in result["findings"]} == {
         "EXAMPLE-COMPLETENESS-1",
         "EXAMPLE-DATA-1",
         "EXAMPLE-DATA-2",
+        "EXAMPLE-DATA-3",
+        "EXAMPLE-DATA-4",
         "EXAMPLE-IMPACT-1",
         "EXAMPLE-OUTPUT-1",
         "EXAMPLE-OVERSIGHT-1",
+        "EXAMPLE-SYSTEM-1",
+        "EXAMPLE-VENDOR-1",
     }
     assert "DRAFT ASSESSMENT - HUMAN REVIEW REQUIRED" in result["draft_assessment"]
     assert result["presentation_text"].startswith("Review result")
@@ -131,7 +135,7 @@ def test_analyze_treats_instruction_text_as_data(tmp_path: Path) -> None:
         "presentation_text",
         "schema_version",
     }
-    assert len(result["findings"]) == 6
+    assert len(result["findings"]) == 10
     assert result["blocking_findings"] == []
     assert instruction in result["draft_assessment"]
 

@@ -1,4 +1,4 @@
-"""Deterministic facts for conversational result presentation."""
+"""Deterministic facts for AI-assisted result presentation."""
 
 ACTIVE_STATUSES = frozenset({"triggered", "needs_information"})
 DRAFT_HEADING = "# DRAFT ASSESSMENT - HUMAN REVIEW REQUIRED"
@@ -10,7 +10,7 @@ def build_presentation_facts(
     open_questions: list[dict[str, object]],
     blocking_findings: list[str],
 ) -> dict[str, object]:
-    """Return the only quantitative facts a conversational host should present."""
+    """Return the only quantitative facts an AI-assisted host should present."""
 
     metadata = policy.get("policy", {})
     assert isinstance(metadata, dict)
@@ -43,7 +43,7 @@ def build_presentation_text(
     findings: list[dict[str, object]],
     open_questions: list[dict[str, object]],
 ) -> str:
-    """Render the complete default conversational response from engine facts."""
+    """Render the canonical result block from engine facts."""
 
     policy = presentation_facts["policy"]
     active_counts = presentation_facts["active_findings"]

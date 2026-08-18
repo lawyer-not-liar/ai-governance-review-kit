@@ -187,3 +187,61 @@ def test_findings_are_sorted_and_include_observed_facts():
 
 def test_example_policy_document_is_schema_valid(example_policy):
     validate_document(example_policy, "policy")
+
+
+@pytest.mark.parametrize(
+    ("section", "field", "value", "rule_id", "evidence_id", "severity"),
+    [
+        (
+            "system",
+            "autonomy",
+            "autonomous",
+            "EXAMPLE-SYSTEM-1",
+            "oversight-plan",
+            "block",
+        ),
+        (
+            "system",
+            "hosting",
+            "third_party",
+            "EXAMPLE-VENDOR-1",
+            "provider-assessment",
+            "review",
+        ),
+        (
+            "data",
+            "sensitive_data",
+            True,
+            "EXAMPLE-DATA-3",
+            "sensitive-data-assessment",
+            "review",
+        ),
+        (
+            "data",
+            "cross_border_transfers",
+            True,
+            "EXAMPLE-DATA-4",
+            "transfer-assessment",
+            "review",
+        ),
+    ],
+)
+def test_example_policy_routes_additional_common_review_dimensions(
+    example_policy, section, field, value, rule_id, evidence_id, severity
+):
+    intake = deepcopy(VALID_INTAKE)
+    intake[section][field] = value
+
+    findings, questions = evaluate_policy(intake, example_policy, [])
+    finding = next(item for item in findings if item["rule_id"] == rule_id)
+
+    assert finding["status"] == "needs_information"
+    assert finding["severity"] == severity
+    assert finding["missing_evidence"] == [evidence_id]
+    assert questions == [
+        {
+            "id": f"question-{rule_id}",
+            "path": "evidence",
+            "question": finding["question"],
+        }
+    ]
